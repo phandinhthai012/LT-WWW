@@ -1,0 +1,170 @@
+<dependencies>
+		<dependency>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+		<dependency>
+			<groupId>jakarta.servlet.jsp</groupId>
+			<artifactId>jakarta.servlet.jsp-api</artifactId>
+			<version>3.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.17.2</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>11.2.3.jre17</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.4.4.Final</version>
+		</dependency>
+	</dependencies>
+
+//////////////
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="QL_mssql">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<properties>
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=QLXEMAY;trustServerCertificate=true" />
+			<property name="jakarta.persistence.jdbc.user" value="sa" />
+			<property name="jakarta.persistence.jdbc.password" value="123456" />
+			<property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+			<property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+			
+			<property name="jakarta.persistence.schema.generation.database.action" value="none" />
+			
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.highlit_sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
+
+
+/////////////
+beans.xml webapp/web-inf/beans.xml
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
+
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_4_0.xsd"
+	version="4.0" bean-discovery-mode="all">
+
+</beans>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<a href="${pageContext.request.contextPath}/XeController">DanhSach</a>
+
+//////////////////////////////////
+footer
+<body>
+<div class="footer">
+		<p>Phan Đình Thái</p>
+		<p>21038281</p>
+		<p>Lập trình WWW (Java) DHKTPM17B</p>
+
+	</div>
+</body>
+
+<style>
+.footer {
+	border: 1px solid #ccc;
+	text-align: center;
+	background-color: #f1f1f1;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	bottom: 0;
+}
+
+.footer p {
+	margin: 0;
+	margin-right: 10px;
+}
+</style>
+
+
+.tableSP {
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.tableSP th {
+	background-color: #f1f1f1;
+}
+
+.tableSP td {
+	border: 1px solid #ccc;
+	padding: 10px;
+	
+
+.header {
+	width: 100%;
+	height: 120px;
+}
+
+.viewHeader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+a {
+	margin: 10px;
+}
+
+utils
+
+	private  final String PERSISTENCE_UNIT_NAME = "QL_mssql";
+	private  EntityManagerFactory factory;
+	private  EntityManager em;
+	public persistenceUtils() {
+		factory = Persistence.createEntityManagerFactory("QL_mssql");
+		em = factory.createEntityManager();
+	}
+	public  EntityManager getEntityManager() {
+		return em;
+	}
+	public void close() {
+		factory.close();
+		em.close();
+	}
+}
