@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Phân Trang</title>
+</head>
+<body>
+<h1 th:text="${springApplicationName}">Product List</h1>
+<br>
+<form action="/search" method="get">
+    <label >Keyword:</label>
+    <input type="text" name="keyword" placeholder="Tìm kiếm sản phẩm...">
+    <button type="submit">Tìm kiếm</button>
+</form>
+<br>
+<form action="/searchByPrice" method="get">
+    <label >Price:</label>
+    <input type="text" name="price" placeholder="Tìm kiếm sản phẩm theo giá...">
+    <button type="submit">Tìm kiếm</button>
+</form>
+<br>
+<form action="/searchByRegisterDate" method="get">
+    <label for="registerDate">Register Date:</label>
+    <input type="date" id="registerDate" name="registerDate" />
+    <button type="submit">Search</button>
+</form>
+<br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Register Date</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.code}">Code</td>
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.description}">Description</td>
+        <td th:text="${product.registerDate}">Register Date</td>
+        <td th:text="${product.price}">Price</td>
+    </tr>
+    </tbody>
+</table>
+<div>
+  <span th:each="i : ${#numbers.sequence(0, totalPage - 1)}">
+    <a th:href="@{|/phanTrang?page=${i}|}" th:text="${i + 1}">1</a>
+  </span>
+</div>
+
+<h3><a th:href="@{/}"/>trang chính</a></h3>
+</body>
+</html>

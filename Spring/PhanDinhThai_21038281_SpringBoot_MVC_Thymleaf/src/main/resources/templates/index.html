@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<div style="margin-left: 50px">
+    <h1 th:text="${springApplicationName}">Product List</h1>
+    <td><h3><a th:href="@{phanTrang}">Phân trang</a></h3></td>
+    <td><h3><a th:href="@{/}"/>Trang chính</a></h3></td>
+    <td><h3><a th:href="@{/showForm}"/>Thêm mới</a></h3></td>
+    <br>
+    <table>
+        <tr>
+            <td>
+                <form action="/search" method="get">
+                    <label >Keyword:</label>
+                    <input type="text" name="keyword" placeholder="Tìm kiếm sản phẩm...">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/searchByPrice" method="get">
+                    <label >Price:</label>
+                    <input type="text" name="price" placeholder="Tìm kiếm sản phẩm theo giá...">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <form action="/searchByRegisterDate" method="get">
+                    <label for="registerDate">Register Date:</label>
+                    <input type="date" id="registerDate" name="registerDate" />
+                    <button type="submit">Search</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/filterByCategory" method="get">
+                    <label for="category">Category:</label>
+                    <select id="category" name="categoryId">
+                        <option value="0">Select a category</option>
+                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                    </select>
+                    <button type="submit">Filter</button>
+                </form>
+            </td>
+
+        </tr>
+    </table>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Register Date</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.code}">Code</td>
+                <td th:text="${product.name}">Name</td>
+                <td th:text="${product.description}">Description</td>
+                <td th:text="${product.registerDate}">Register Date</td>
+                <td th:text="${product.price}">Price</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
