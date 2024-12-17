@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3 th:text="${message}">Hello World</h3>
+<form action="/search" method="get">
+    <input type="text" name="search" placeholder="Search">
+    <button type="submit">Search</button>
+</form>
+<br>
+<h3><a href="/addNew">Add New</a></h3>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>ProID</th>
+        <th>ProName</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">Order ID</td>
+            <td th:text="${order.proID}">ProID</td>
+            <td th:text="${order.proName}">ProName</td>
+            <td th:text="${order.quantity}">Quantity</td>
+            <td th:text="${order.price} + ' vnđ'">Price</td>
+            <td>
+                <a th:href="@{'/details/' + ${order.id}}">Edit</a> |
+                <a th:href="@{'/delete/' + ${order.id}}">Delete</a> |
+                <a th:href="@{'/details/' + ${order.id}}">Details</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</html>

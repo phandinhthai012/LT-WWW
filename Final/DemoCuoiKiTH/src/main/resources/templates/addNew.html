@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+<h3>Add New</h3>
+<form action="/addOrder" method="get" th:object="${order}">
+    <div>
+        <label>ProID</label>
+        <input type="text" name="proID" th:field="*{proID}">
+    </div>
+    <div>
+        <label>ProName</label>
+        <input type="text" name="proName" th:field="*{proName}">
+    </div>
+    <div>
+        <label>Quantity</label>
+        <input type="text" name="quantity" th:field="*{quantity}">
+    </div>
+    <div>
+        <label>Price</label>
+        <input type="text" name="price" th:field="*{price}">
+    </div>
+    <button type="submit">Add</button>
+</form>
+</body>
+<style>
+    div {
+        margin-bottom: 10px;
+    }
+    button {
+        margin-top: 10px;
+    }
+    label {
+        display: block;
+    }
+</style>
+</html>
