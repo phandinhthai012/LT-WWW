@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3 th:text="${message}">Hello World</h3>
+<form action="/editOrder2" method="get" th:object="${order}">
+    <div>
+        <label>OrderId</label>
+        <input type="text" name="id" th:field="*{id}" readonly >
+    </div>
+    <div>
+        <!--        <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>-->
+        <label>ProID</label>
+        <input type="text" name="proID" th:field="*{proID}"> | <span style="color:red" th:if="${#fields.hasErrors('proID')}" th:errors="*{proID}"></span>
+    </div>
+    <div>
+        <label>ProName</label>
+        <input type="text" name="proName" th:field="*{proName}"> | <span style="color:red" th:if="${#fields.hasErrors('proName')}" th:errors="*{proName}"></span>
+    </div>
+    <div>
+        <label>Quantity</label>
+        <input type="text" name="quantity" th:field="*{quantity}"> | <span style="color:red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+    </div>
+    <div>
+        <label>Price</label>
+        <input type="text" name="price" th:field="*{price}"> | <span style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+    </div>
+    <button type="submit">Edit</button>
+</form>
+<h4><a href="/">Back to Home</a></h4>
+</body>
+</html>
