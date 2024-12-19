@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Home Page</h3>
+<!--<p>Chào mừng đến với trang chủ</p>-->
+<!--<p>Đây là trang chủ của ứng dụng Spring Boot</p>-->
+<h4>Catergory</h4>
+<label>
+    <form th:action="@{'/searchCatergory'}" th:method="GET">
+        <select name="id">
+            <option value="0">All</option>
+            <option th:each="catergories : ${catergories}" th:value="${catergories.id}" th:text="${catergories.name}">
+                Catergory
+            </option>
+        </select>
+        <button type="submit">Tìm kiếm</button>
+    </form>
+    <select>
+        <option th:each="catergories : ${catergories}" th:value="${catergories.id}" th:text="${catergories.name}">
+            Catergory
+        </option>
+    </select>
+</label>
+<br>
+<h3>Search text</h3>
+<form th:action="@{'/search'}" th:method="GET">
+    <div>
+        <label for="search">Từ khóa:</label>
+        <input id="search" type="text" name="name" placeholder="Search by name">
+    </div>
+    <button type="submit">Tìm kiếm</button>
+</form>
+<h3>Search RegisterDate</h3>
+<form th:action="@{'/searchDate'}" th:method="GET">
+    <div>
+        <label for="searchDate">RegisterDate:</label>
+        <input id="searchDate" type="date" name="date" placeholder="Search by RegisterDate">
+    </div>
+    <button type="submit">Tìm kiếm</button>
+</form>
+<h3>Search Price</h3>
+<form th:action="@{'/searchPrice'}" th:method="GET">
+    <div>
+        <label for="searchPrice">Price:</label>
+        <input id="searchPrice" type="number" name="price" placeholder="Search by Price">
+    </div>
+    <button type="submit">Tìm kiếm</button>
+</form>
+<h3>Search Price</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Resgiter Date</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">Id</td>
+        <td th:text="${product.code}">Code</td>
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.description}">Description</td>
+        <td th:text="${product.price}">Price</td>
+        <td th:text="${product.resgiterDate}">Resgiter Date</td>
+        <td th:text="${product.catergory.name}">Category</td>
+        <td>
+            <a th:href="@{'/edit/' + ${product.id}}">Edit</a>
+            <a th:href="@{'/delete/' + ${product.id}}">Delete</a>
+            <a th:href="@{'/detail/' + ${product.id}}">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<div th:if="${totalPage != null} and ${currentPage != null}">
+    <span th:text="'TotalPage:'+${totalPage}">Total Page</span><br><br>
+    <span th:text="'CurrentPage:'+${currentPage}">Current Page</span>
+    <br>
+    <br>
+    <span th:each="i : ${#numbers.sequence(1, totalPage)}">
+        <a th:href="@{'/page/' + ${i}}">[<span th:text="${i}">1</span>]</a>
+    </span>
+</div>
+<h2><a th:href="@{/}" >HomePage</a></h2>
+</body>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</html>
