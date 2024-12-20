@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+</head>
+<body>
+<h2><a th:href="@{/}" >HomePage</a></h2>
+<h3 th:text="${message}"></h3>
+<form action="/addProduct" method="get" th:object="${product}">
+    <div>
+        <label for="code">Code:</label>
+        <input id="code" type="text" name="code" th:field="*{code}" >
+    </div>
+    <div>
+        <label for="name">Name:</label>
+        <input id="name" type="text" name="name" th:field="*{name}" >
+    </div>
+    <div>
+        <label for="Description">Description:</label>
+        <input id="Description" type="text" name="description" th:field="*{description}" >
+    </div>
+    <div>
+        <label for="Price">Price:</label>
+        <input id="Price" type="number" name="price" th:field="*{price}">
+    </div>
+    <div>
+        <label for="RegisterDate">RegisterDate:</label>
+        <input id="RegisterDate" type="date" name="registerDate" th:field="*{resgiterDate}">
+    </div>
+    <div>
+        <label for="category">category:</label>
+<!--        <select id="category" name="category" th:field="*{category.id}">-->
+        <select id="category" name="catergoryid">
+            <option value="">-- Chọn danh mục --</option>
+            <option th:each="catergories : ${catergories}" th:value="${catergories.id}" th:text="${catergories.name}">
+                Catergory
+            </option>
+        </select>
+    </div>
+    <button type="submit">Edit</button>
+</form>
+</body>
+</html>

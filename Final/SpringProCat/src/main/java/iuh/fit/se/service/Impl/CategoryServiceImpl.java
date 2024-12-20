@@ -22,4 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
     public boolean addCategory(Catergory category) {
         return catergoryDao.addCatergory(category);
     }
+
+    @Override
+    public Catergory getCatergoryById(int id) {
+        return catergoryDao.getCatergoryById(id);
+    }
 }

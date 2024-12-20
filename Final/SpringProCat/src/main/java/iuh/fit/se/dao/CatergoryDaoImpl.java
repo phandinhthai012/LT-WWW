@@ -28,4 +28,9 @@ public class CatergoryDaoImpl implements  CatergoryDao{
             return false;
         }
     }
+
+    @Override
+    public Catergory getCatergoryById(int id) {
+        return entityManager.find(Catergory.class,id);
+    }
 }

@@ -74,7 +74,7 @@
         <td th:text="${product.resgiterDate}">Resgiter Date</td>
         <td th:text="${product.catergory.name}">Category</td>
         <td>
-            <a th:href="@{'/edit/' + ${product.id}}">Edit</a>
+            <a th:href="@{'/detail/' + ${product.id}}">Edit</a>
             <a th:href="@{'/delete/' + ${product.id}}">Delete</a>
             <a th:href="@{'/detail/' + ${product.id}}">Detail</a>
         </td>
@@ -92,6 +92,7 @@
     </span>
 </div>
 <h2><a th:href="@{/}" >HomePage</a></h2>
+<h2><a th:href="@{'/formAdd'}" >Add new Product</a></h2>
 </body>
 <style>
     table {

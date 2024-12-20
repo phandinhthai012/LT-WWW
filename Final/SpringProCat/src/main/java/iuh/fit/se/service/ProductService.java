@@ -16,4 +16,5 @@ public interface ProductService {
     public List<Product> seachPrice(double price);
     public Product getProductById(int id);
     public List<Product> seacchProductByCategory(int id);
+    public boolean deleteProduct(int id);
 }

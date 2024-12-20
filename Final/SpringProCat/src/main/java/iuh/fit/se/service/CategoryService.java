@@ -7,4 +7,5 @@ import java.util.List;
 public interface CategoryService {
     public List<Catergory> getALLCategory();
     public boolean addCategory(Catergory category);
+    public Catergory getCatergoryById(int id);
 }

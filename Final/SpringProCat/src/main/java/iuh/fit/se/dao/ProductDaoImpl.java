@@ -73,4 +73,16 @@ public class ProductDaoImpl implements ProductDao{
         String query = "SELECT p FROM Product p WHERE p.catergory.id = :id";
         return entityManager.createQuery(query,Product.class).setParameter("id",id).getResultList();
     }
+
+    @Override
+    public boolean deleteProduct(int id) {
+        try {
+            Product product = entityManager.find(Product.class,id);
+            entityManager.remove(product);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

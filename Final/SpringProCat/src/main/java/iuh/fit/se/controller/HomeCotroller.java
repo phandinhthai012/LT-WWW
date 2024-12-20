@@ -84,7 +84,7 @@ public class HomeCotroller {
 //        return "HomePage";
 //    }
     @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public String searchProduct(Model model,@RequestParam("name") String name){
+    public String searchProduct(Model model,@RequestParam(value = "name",defaultValue = "") String name){
         System.out.println(name);
         List<Product> products = productService.searchProduct(name);
         List<Catergory> catergories = categoryService.getALLCategory();
@@ -93,7 +93,7 @@ public class HomeCotroller {
         return "HomePage";
     }
     @RequestMapping(value = "/searchDate",method = RequestMethod.GET)
-    public String searchDate(Model model,@RequestParam("date") String date){
+    public String searchDate(Model model,@RequestParam(value = "date",defaultValue = "2024-12-19") String date){
         System.out.println(date);
         Date dateSearch =null;
         try {
@@ -108,7 +108,7 @@ public class HomeCotroller {
         return "HomePage";
     }
     @RequestMapping(value = "/searchPrice",method = RequestMethod.GET)
-    public String searchPrice(Model model,@RequestParam("price") double price){
+    public String searchPrice(Model model,@RequestParam(value = "price",defaultValue = "100") double price){
         System.out.println(price);
         List<Product> products = productService.seachPrice(price);
         List<Catergory> catergories = categoryService.getALLCategory();
@@ -137,6 +137,31 @@ public class HomeCotroller {
         List<Catergory> catergories = categoryService.getALLCategory();
         model.addAttribute("catergories",catergories);
         model.addAttribute("products",products);
+        model.addAttribute("message","Product detail and can edit");
         return "HomePage";
+    }
+    @RequestMapping(value = "/formAdd",method = RequestMethod.GET)
+    public String showFormAdd(Model model){
+        model.addAttribute("message", "Add new Productz");
+        model.addAttribute("product", new Product());
+        List<Catergory> catergories = categoryService.getALLCategory();
+        model.addAttribute("catergories",catergories);
+        return "AddProduct";
+    }
+    @RequestMapping(value = "/addProduct",method = RequestMethod.GET)
+    public String addProduct(Model model,@ModelAttribute("product") Product product,@RequestParam("catergoryid") int id){
+//        productService.addProduct(product);
+        System.out.println(product);
+        System.out.println(id);
+        product.setCatergory(categoryService.getCatergoryById(id));
+        productService.addProduct(product);
+        System.out.println(product);
+        return "redirect:/";
+
+    }
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    public String deleteProduct(Model model,@PathVariable int id){
+        productService.deleteProduct(id);
+        return "redirect:/";
     }
 }

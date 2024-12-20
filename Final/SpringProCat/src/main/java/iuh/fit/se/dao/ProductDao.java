@@ -16,4 +16,5 @@ public interface ProductDao {
     public List<Product> seachDate(Date date);
     public List<Product> seachPrice(double price);
     public List<Product> seacchProductByCategory(int id);
+    public boolean deleteProduct(int id);
 }

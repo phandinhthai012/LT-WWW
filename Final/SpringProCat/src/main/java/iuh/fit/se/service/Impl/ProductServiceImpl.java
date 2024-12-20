@@ -58,4 +58,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> seacchProductByCategory(int id) {
         return productDao.seacchProductByCategory(id);
     }
+
+    @Override
+    public boolean deleteProduct(int id) {
+        return productDao.deleteProduct(id);
+    }
 }
